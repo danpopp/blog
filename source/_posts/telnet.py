@@ -38,14 +38,19 @@ class MyTelnetHandler(TelnetHandler):
         Shows a list of available posts.
 	
         '''
+        i = 0
+        j = 1
 	for dirname, dirnames, filenames in os.walk('.'):
     	# print path to all subdirectories first.
     	  for subdirname in dirnames:
             paths = os.path.join(dirname, subdirname)
+            i += 1
    	# print path to all filenames.
+          j=1
   	  for filename in filenames:
             files = os.path.join(dirname, filename)
-            self.writeline(files)
+            self.writeline(str(i) + '-' + str(j) + ' ' + files.strip('./'))
+            j += 1
     	# Advanced usage:
     	# editing the 'dirnames' list will stop os.walk() from recursing into there.
    	  if '.git' in dirnames:
